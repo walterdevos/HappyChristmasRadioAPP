@@ -14,7 +14,7 @@
 
         // device APIs are available
         function onDeviceReady() {
-            if (!my_media) { playAudio("http://listen.radionomy.com/happychristmasradio","Halloweenradio");}
+            if (!my_media) { playAudio("http://listen.radionomy.com/happychristmasradio","Happy Christmas Radio");}
         }
 
         function onStartCall() {
@@ -63,7 +63,7 @@
             paused = false;
             setAudioPosition("Playing " + title);
             window.title = title;
-            if (title == "Halloweenradio"){
+            if (title == "Happy Christmas Radio"){
                 document.getElementById('hrp').src="images/Play2_48x48.png";
             }
 
@@ -159,19 +159,14 @@
 <div id="wrapper">
 
     <div id="player_wrapper1">
-        <img src="text_hr.png" class="title"/>
         <div id="controllers1">
-            <a href="#" class="btn large" onclick="playAudio('http://listen.radionomy.com/halloweenradionet','Halloweenradio');"><img src="images/Play_48x48.png" alt="play" id="hrp"/></a>
+            <a href="#" class="btn large" onclick="playAudio('http://listen.radionomy.com/happychristmasradio','Happy Christmas Radio');"><img src="images/Play_48x48.png" alt="play" id="hrp"/></a>
             <a href="#" class="btn large" onclick="stopAudio();"><img src="images/Stop_48x48.png" alt="stop"/></a>
         </div>
     </div>
 
     <div id="status_wrapper">
         <p id="audio_position"></p>
-    </div>
-
-    <div id="dth_wrapper">
-        <div id="dth"></div>
     </div>
 
     <div id="option_wrapper">

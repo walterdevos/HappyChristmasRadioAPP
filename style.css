@@ -18,10 +18,9 @@ body{
 }
 
 img.title {
-    width: 70%;
+    width: 60%;
     float:left;
-    margin-left: -40px;
-    margin-right: -40px;
+    margin-left: 65px;
 }
 img.option {
     width: 100%;
@@ -29,42 +28,15 @@ img.option {
 
 #player_wrapper1{
      position: absolute;
-     top :50px;
+     top :200px;
      width:100%;
  }
-#player_wrapper2{
-    position: absolute;
-    top :130px;
-    width:100%;
-}
-#player_wrapper3{
-    position: absolute;
-    top :210px;
-    width:100%;
-}
+
 #status_wrapper{
     position: absolute;
     top :290px;
     width:100%;
     text-align: center;
-}
-
-#dth_wrapper{
-    position: absolute;
-    bottom:75px;
-    width:100%;
-
-}
-
-#dth{
-    width:285px;
-    height:150px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#dth iframe {
-
 }
 
 #option_wrapper{
