@@ -18,10 +18,12 @@ body{
 }
 
 img.title {
-    width: 60%;
-    float:left;
-    margin-left: 65px;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
+
 img.option {
     width: 100%;
  }
@@ -52,7 +54,12 @@ img.option {
 
 
 #controllers1 , #controllers2 , #controllers3 {
-    display: inline;
+    width: 102px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 }
 
 #audio_position {
