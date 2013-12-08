@@ -26,4 +26,6 @@
         <param name="android-package" value="org.apache.cordova.AudioHandler" />
     </feature>
 
+    <icon src="icon.png" />
+
 </widget>
