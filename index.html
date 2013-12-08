@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Halloween radio</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8" src="PhoneListener.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+        // Wait for device API libraries to load
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+        // device APIs are available
+        function onDeviceReady() {
+            if (!my_media) { playAudio("http://listen.radionomy.com/happychristmasradio","Halloweenradio");}
+        }
+
+        function onStartCall() {
+            stopAudio();
+         }
+
+        // Audio player
+        var my_media = null;
+        var mediaTimer = null;
+        var paused = false;
+        var pib = false;
+        var title ='';
+        var playtitle ='';
+
+        // Play in background switch
+        function playInBackground(){
+            if (pib){
+                document.removeEventListener("pause",onStartCall);
+                pib = false;
+                document.getElementById('pib').src="pibyes.png";
+
+            }else{
+                document.addEventListener("pause", onStartCall, false);
+                pib = true;
+                document.getElementById('pib').src="pibno.png";
+            }
+        }
+
+
+        // Play audio
+        function playAudio(src,title) {
+            // Create Media object from src
+
+            if (my_media == null) {
+                           my_media = new Media(src, onSuccess, onError);
+            } else {
+                if (my_media) {
+                    my_media.stop();
+                    clearHighlights();
+                    my_media = new Media(src, onSuccess, onError);
+                }
+            }
+
+            // Play audio
+            my_media.play();
+            paused = false;
+            setAudioPosition("Playing " + title);
+            window.title = title;
+            if (title == "Halloweenradio"){
+                document.getElementById('hrp').src="images/Play2_48x48.png";
+            }
+
+            // Update my_media position every second
+            if (mediaTimer == null) {
+                mediaTimer = setInterval(function () {
+                    // get my_media position
+                    my_media.getCurrentPosition(
+                            // success callback
+                            function (position) {
+                                playtitle = window.title;
+                                if (position > 0) {
+                                    if( !paused) {
+                                        setAudioPosition("Playing " + playtitle);
+                                    }
+                                    else{
+                                        setAudioPosition("Paused " + playtitle);
+                                    }
+                                }
+                                else {
+                                    setAudioPosition("Buffering...");
+                                }
+                            },
+                            // error callback
+                            function (e) {
+                                console.log("Error getting pos=" + e);
+                                setAudioPosition("Error: " + e);
+                            }
+                    );
+                }, 1000);
+            }
+        }
+
+        // Pause audio
+        function pauseAudio() {
+            if (my_media && !paused ) {
+                my_media.pause();
+                paused = true;
+            } else if (my_media && paused) {
+                my_media.play();
+                paused = false;
+            }
+
+        }
+
+
+
+        // Stop audio
+        function stopAudio() {
+            if (my_media) {
+                my_media.stop();
+            }
+            clearInterval(mediaTimer);
+            mediaTimer = null;
+            my_media = null;
+            setAudioPosition("Stopped.");
+            clearHighlights();
+
+        }
+
+        // onSuccess Callback
+        function onSuccess() {
+            console.log("playAudio():Audio Success");
+        }
+
+        // onError Callback
+        function onError(error) {
+            my_media.stop();
+            my_media.release();
+            my_media = null;
+            clearInterval(mediaTimer);
+            mediaTimer = null;
+            setAudioPosition("Stopped.");
+            clearHighlights();
+
+            alert('An error occurred, audio has stopped. (please don\'t interrupt while buffering is in progress)' + '\n');
+        }
+
+        // Set audio position
+        function setAudioPosition(position) {
+            document.getElementById('audio_position').innerHTML = position;
+        }
+
+        function clearHighlights(){
+            document.getElementById('hrp').src="images/Play_48x48.png";
+            document.getElementById('hrap').src="images/Play_48x48.png";
+            document.getElementById('hrop').src="images/Play_48x48.png";
+        }
+
+</script>
+</head>
+<body>
+<div id="wrapper">
+
+    <div id="player_wrapper1">
+        <img src="text_hr.png" class="title"/>
+        <div id="controllers1">
+            <a href="#" class="btn large" onclick="playAudio('http://listen.radionomy.com/halloweenradionet','Halloweenradio');"><img src="images/Play_48x48.png" alt="play" id="hrp"/></a>
+            <a href="#" class="btn large" onclick="stopAudio();"><img src="images/Stop_48x48.png" alt="stop"/></a>
+        </div>
+    </div>
+
+    <div id="status_wrapper">
+        <p id="audio_position"></p>
+    </div>
+
+    <div id="dth_wrapper">
+        <div id="dth"></div>
+    </div>
+
+    <div id="option_wrapper">
+        <div id="options">
+            <a href="#" class="options" onclick="playInBackground();"><img src="pibyes.png" alt="play in background" class="option" id="pib"/></a>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

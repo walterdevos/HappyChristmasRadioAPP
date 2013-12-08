@@ -1,0 +1,88 @@
+body{
+    background-color: #000;
+}
+
+
+#wrapper{
+    position: absolute;
+    width:100%;
+    margin: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    overflow: hidden;
+    height:100%;
+    background: url('back.jpg') no-repeat;
+    background-size: 100% 100%;
+}
+
+img.title {
+    width: 70%;
+    float:left;
+    margin-left: -40px;
+    margin-right: -40px;
+}
+img.option {
+    width: 100%;
+ }
+
+#player_wrapper1{
+     position: absolute;
+     top :50px;
+     width:100%;
+ }
+#player_wrapper2{
+    position: absolute;
+    top :130px;
+    width:100%;
+}
+#player_wrapper3{
+    position: absolute;
+    top :210px;
+    width:100%;
+}
+#status_wrapper{
+    position: absolute;
+    top :290px;
+    width:100%;
+    text-align: center;
+}
+
+#dth_wrapper{
+    position: absolute;
+    bottom:75px;
+    width:100%;
+
+}
+
+#dth{
+    width:285px;
+    height:150px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#dth iframe {
+
+}
+
+#option_wrapper{
+    position: absolute;
+    bottom:10px;
+    width:100%;
+}
+
+#status_wrapper p {
+    text-align: center;
+    width:100%;
+}
+
+
+#controllers1 , #controllers2 , #controllers3 {
+    display: inline;
+}
+
+#audio_position {
+    color: white;
+}
